@@ -16,8 +16,16 @@ class PokemonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.createButtons()
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        print(sender.title(for: .normal)!)
+    }
+    
+    func createButtons() {
+        for button in self.answerButtons {
+            button.layer.cornerRadius = 10.0
+        }
     }
 }
