@@ -25,16 +25,7 @@ class PokemonViewController: UIViewController {
         }
     }
     var correctAnswer : String = ""
-    var correctAnswerImage : String = "" {
-        didSet {
-            DispatchQueue.main.async { [self] in
-                let url = URL(string: self.correctAnswerImage)
-                let effect = ColorControlsProcessor(brightness: -1, contrast: 1, saturation: 1, inputEV: 0)
-                pokemonImage.kf.setImage(with: url, options: [.processor(effect)])
-            }
-            
-        }
-    }
+    var correctAnswerImage : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +40,36 @@ class PokemonViewController: UIViewController {
         let userAnswer = sender.title(for: .normal)!
         if game.verifyAnswer(verify: userAnswer, with: correctAnswer) {
             self.messageLabel.text = "Si, es un \(userAnswer)"
-            self.scoreLabel.text = "Puntaje: \(game.score)"
+            self.scoreLabel.text = "Puntaje: \(game.getScore())"
             
             sender.layer.borderColor = UIColor.systemGreen.cgColor
             sender.layer.borderWidth = 2.0
+            
+            let url = URL(string: self.correctAnswerImage)
+            self.pokemonImage.kf.setImage(with: url)
+            
+            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
+                self.pokemonManager.fetchData()
+                self.messageLabel.text = ""
+                sender.layer.borderWidth = 0.0
+            }
+        } else {
+            self.game.resetScore()
+            self.messageLabel.text = "No, es un \(correctAnswer)"
+            self.scoreLabel.text = "Puntaje: \(game.getScore())"
+            
+            sender.layer.borderColor = UIColor.systemRed.cgColor
+            sender.layer.borderWidth = 2.0
+            
+            let url = URL(string: self.correctAnswerImage)
+            self.pokemonImage.kf.setImage(with: url)
+            
+            
+            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
+                self.pokemonManager.fetchData()
+                self.messageLabel.text = ""
+                sender.layer.borderWidth = 0.0
+            }
         }
     }
     
@@ -88,6 +105,12 @@ extension PokemonViewController : PokemonManagerDelegate {
 extension PokemonViewController : ImageManagerDelegate {
     func didUpdateImage(image: ImageModel) {
         self.correctAnswerImage = image.imageURL
+        
+        DispatchQueue.main.async { [self] in
+            let url = URL(string: image.imageURL)
+            let effect = ColorControlsProcessor(brightness: -1, contrast: 1, saturation: 1, inputEV: 0)
+            pokemonImage.kf.setImage(with: url, options: [.processor(effect)])
+        }
     }
     func didFailWithImageError(error: Error) {
         print(error)

@@ -15,16 +15,24 @@ struct GameModel {
     }
     
     func getScore () -> Int {
-        return score
+        return self.score
     }
     
-    private mutating func setScore (score : Int) -> Bool {
+    private mutating func setScore (score : Int) -> Void {
         self.score = score
-        return true
         
     }
     
     mutating func verifyAnswer(verify userAnswer : String, with correctAnswer : String) -> Bool {
-        return checkAnswer(verify: userAnswer, with: correctAnswer) ? setScore(score: self.score + 1) : false
+        if checkAnswer(verify: userAnswer, with: correctAnswer) {
+            self.setScore(score: self.score + 1)
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    mutating func resetScore() -> Void {
+        self.setScore(score: 0)
     }
 }
