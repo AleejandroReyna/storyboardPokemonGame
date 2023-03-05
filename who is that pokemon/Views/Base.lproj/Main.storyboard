@@ -133,7 +133,7 @@
                         <outletCollection property="answerButtons" destination="O95-M6-Fow" collectionClass="NSMutableArray" id="lIb-Wx-FqP"/>
                         <outletCollection property="answerButtons" destination="s8P-Tu-ouw" collectionClass="NSMutableArray" id="ogg-6i-iy3"/>
                         <outletCollection property="answerButtons" destination="W7F-7Q-PUE" collectionClass="NSMutableArray" id="sh8-8N-2Nh"/>
-                        <segue destination="For-mf-rOd" kind="presentation" identifier="goToResults" modalPresentationStyle="fullScreen" id="rRf-4W-uwv"/>
+                        <segue destination="For-mf-rOd" kind="presentation" identifier="goToResult" modalPresentationStyle="fullScreen" id="9YN-pT-I5b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
