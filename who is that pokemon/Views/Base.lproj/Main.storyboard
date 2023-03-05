@@ -188,6 +188,9 @@
                                         <buttonConfiguration key="configuration" style="filled" title="Jugar de nuevo">
                                             <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="21"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="playAgainPress:" destination="For-mf-rOd" eventType="touchUpInside" id="85d-Zv-R0j"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -207,7 +210,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Oj2-6v-hZC"/>
                     <connections>
+                        <outlet property="pokemonImage" destination="9Ig-zH-xU7" id="r3i-iQ-zd8"/>
                         <outlet property="pokemonLabel" destination="bbB-gi-cHs" id="Mj5-qa-28y"/>
+                        <outlet property="resultImage" destination="SSZ-Lw-bzB" id="QGb-fU-Hm1"/>
+                        <outlet property="scoreLabel" destination="zmE-qW-a4E" id="Pqk-hd-hOE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaT-i2-BTY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
