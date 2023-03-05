@@ -1,5 +1,6 @@
-# ¿Quién es ese Pokémon?
-Base Repository
+# ¿Who's this Pokemon?
+Pokemon game based on Platzi course about Swift and Storyboards.
+
 
 ## Licencia
-> Este proyecto esta creado baja la licencia MIT.
+> MIT Licence by default.
