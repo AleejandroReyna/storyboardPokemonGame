@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PokemonViewController: UIViewController {
     
@@ -18,25 +19,54 @@ class PokemonViewController: UIViewController {
     lazy private var imageManager = ImageManager()
     lazy private var game = GameModel()
     
-    var randomPokemons : [PokemonModel] = []
+    var randomPokemons : [PokemonModel] = [] {
+        didSet {
+            setButtonsTitle()
+        }
+    }
     var correctAnswer : String = ""
-    var correctAnswerImage : String = ""
+    var correctAnswerImage : String = "" {
+        didSet {
+            DispatchQueue.main.async { [self] in
+                let url = URL(string: self.correctAnswerImage)
+                let effect = ColorControlsProcessor(brightness: -1, contrast: 1, saturation: 1, inputEV: 0)
+                pokemonImage.kf.setImage(with: url, options: [.processor(effect)])
+            }
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pokemonManager.delegate = self
         self.imageManager.delegate = self
+        self.messageLabel.text = ""
         self.createButtons()
         pokemonManager.fetchData()
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print(sender.title(for: .normal)!)
+        let userAnswer = sender.title(for: .normal)!
+        if game.verifyAnswer(verify: userAnswer, with: correctAnswer) {
+            self.messageLabel.text = "Si, es un \(userAnswer)"
+            self.scoreLabel.text = "Puntaje: \(game.score)"
+            
+            sender.layer.borderColor = UIColor.systemGreen.cgColor
+            sender.layer.borderWidth = 2.0
+        }
     }
     
     func createButtons() {
         for button in self.answerButtons {
             button.layer.cornerRadius = 10.0
+        }
+    }
+    
+    func setButtonsTitle() {
+        for(index, button) in answerButtons.enumerated() {
+            DispatchQueue.main.async {
+                button.setTitle(self.randomPokemons[safe: index]?.name.capitalized, for: .normal)
+            }
         }
     }
 }
