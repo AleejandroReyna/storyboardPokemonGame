@@ -54,8 +54,7 @@ class PokemonViewController: UIViewController {
                 sender.layer.borderWidth = 0.0
             }
         } else {
-            self.game.resetScore()
-            self.messageLabel.text = "No, es un \(correctAnswer)"
+            /* self.messageLabel.text = "No, es un \(correctAnswer)"
             self.scoreLabel.text = "Puntaje: \(game.getScore())"
             
             sender.layer.borderColor = UIColor.systemRed.cgColor
@@ -69,7 +68,21 @@ class PokemonViewController: UIViewController {
                 self.pokemonManager.fetchData()
                 self.messageLabel.text = ""
                 sender.layer.borderWidth = 0.0
-            }
+            } */
+            self.performSegue(withIdentifier: "goToResult", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "goToResult") {
+            let destination = segue.destination as! ResultsViewController
+            destination.pokemonName = self.correctAnswer
+            destination.pokemonImageURL = self.correctAnswerImage
+            destination.finalScore = self.game.getScore()
+            self.game.resetScore()
+            self.pokemonManager.fetchData()
+            self.scoreLabel.text = "Puntaje: \(game.getScore())"
+            self.messageLabel.text = ""
         }
     }
     

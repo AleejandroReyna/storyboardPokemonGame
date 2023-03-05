@@ -21,8 +21,9 @@ class ResultsViewController: UIViewController {
         super.viewDidLoad()
         
         scoreLabel.text = "Perdiste, tu puntaje fue de \(self.finalScore)."
-        pokemonLabel.text = "No, es \(pokemonName)"
-        pokemonImage.kf.setImage(with: URL(string: pokemonImageURL))
+        pokemonLabel.text = "No, es \(self.pokemonName)"
+        print("image: ", self.pokemonImageURL)
+        pokemonImage.kf.setImage(with: URL(string: self.pokemonImageURL))
 
         // Do any additional setup after loading the view.
     }

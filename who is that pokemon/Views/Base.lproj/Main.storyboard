@@ -212,7 +212,6 @@
                     <connections>
                         <outlet property="pokemonImage" destination="9Ig-zH-xU7" id="r3i-iQ-zd8"/>
                         <outlet property="pokemonLabel" destination="bbB-gi-cHs" id="Mj5-qa-28y"/>
-                        <outlet property="resultImage" destination="SSZ-Lw-bzB" id="QGb-fU-Hm1"/>
                         <outlet property="scoreLabel" destination="zmE-qW-a4E" id="Pqk-hd-hOE"/>
                     </connections>
                 </viewController>
