@@ -16,6 +16,8 @@ class PokemonViewController: UIViewController {
     
     lazy private var pokemonManager = PokemonManager()
     lazy private var imageManager = ImageManager()
+    lazy private var game = GameModel()
+    
     var randomPokemons : [PokemonModel] = []
     var correctAnswer : String = ""
     var correctAnswerImage : String = ""
